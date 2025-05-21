@@ -1,0 +1,70 @@
+enum ProxyAction {
+  ADD
+  REMOVE
+}
+
+type ProxyEvent @entity {
+  id: ID!
+
+  height: Int! @index
+  timestamp: Date
+  extrinsicId: Int
+
+  delegator: String!
+  proxy: String!
+  type: String!
+  action: ProxyAction!
+}
+
+type Delegator @entity {
+  id: ID!
+
+  address: String! @index
+  from_block: Int!
+  from_timestamp: Date
+  type: String!
+}
+
+enum StakingAction {
+  STAKING
+  UNSTAKING
+}
+
+type Staking @entity {
+  id: ID!
+
+  height: Int! @index
+  timestamp: Date
+  extrinsicId: Int @index
+
+  coldkey: String!
+  hotkey: String!
+  action: StakingAction!
+
+  tao: BigInt!
+  netUid: Int!
+  alpha: BigInt!
+}
+
+type AlphaBalance @entity {
+  id: ID!
+  block_number: Int!
+  timestamp: Date
+
+  coldkey: String! @index
+  hotkey: String! @index
+  net_uid: Int! @index
+
+  alpha: Float!
+  price: Float!
+  tao: Float!
+}
+
+type StakedAlpha @entity {
+  id: ID!
+  block_number: Int!
+  timestamp: Date
+
+  coldkey: String! @index
+  tao: Float!
+}
